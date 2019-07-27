@@ -14,33 +14,16 @@ def plugin_loaded():
 	# where sublime insists the file does't exist, when it definitely does
 
 	folder = os.path.join( sublime.packages_path(), 'User' )
-	if not os.path.exists( folder ):
-		os.makedirs( folder )
+	filePath = os.path.join( folder, 'SBSCompareTheme.hidden-tmTheme' )
+	if not os.path.exists(filePath):
+		if not os.path.exists( folder ):
+			os.makedirs( folder )
 	
-	with open( os.path.join( folder, 'SBSCompareTheme.hidden-tmTheme' ), 'w', encoding='utf-8' ) as f:
-		f.write( '' )
+		open(filePath, 'w').close()
 
-	with open( os.path.join( folder, 'SBSCompareScheme.hidden-color-scheme' ), 'w', encoding='utf-8' ) as f:
-		f.write( '' )
+		filePath = os.path.join( folder, 'SBSCompareScheme.hidden-color-scheme' )
+		open(filePath, 'w').close()
 
-	delete_old_non_hidden_files()
-
-def delete_old_non_hidden_files():
-	# Deletes the old previous non hidden files preventing to show them up
-	# in Preferences -> Color Scheme... selection dialog. (See PR #53)
-	# Also, if those files were malformed (0 bytes, as a result of the
-	# bug fixed with PR #55) opening that dialog threw this error message:
-	# 'Error loading colour scheme Packages/User/SBSCompareTheme.tmTheme: Bad XML' 
-
-	folder = os.path.join( sublime.packages_path(), 'User' )
-
-	filePath = os.path.join( folder, 'SBSCompareTheme.tmTheme' )
-	if os.path.exists(filePath):
-		os.remove(filePath)
-
-	filePath = os.path.join( folder, 'SBSCompareScheme.sublime-color-scheme' )
-	if os.path.exists(filePath):
-		os.remove(filePath)
 
 def sbs_settings():
 	return sublime.load_settings( 'SBSCompare.sublime-settings' )
