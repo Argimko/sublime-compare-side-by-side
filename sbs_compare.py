@@ -14,15 +14,16 @@ def plugin_loaded():
 	# where sublime insists the file does't exist, when it definitely does
 
 	folder = os.path.join( sublime.packages_path(), 'User' )
-	filePath = os.path.join( folder, 'SBSCompareTheme.hidden-tmTheme' )
-	if not os.path.exists(filePath):
+
+	themeFilePath = os.path.join( folder, 'SBSCompareTheme.hidden-tmTheme' )
+	schemeFilePath = os.path.join( folder, 'SBSCompareScheme.hidden-scheme' )
+
+	if not os.path.exists(themeFilePath) or not os.path.exists(schemeFilePath):
 		if not os.path.exists( folder ):
 			os.makedirs( folder )
 	
-		open(filePath, 'w').close()
-
-		filePath = os.path.join( folder, 'SBSCompareScheme.hidden-color-scheme' )
-		open(filePath, 'w').close()
+		open(themeFilePath, 'w').close()
+		open(schemeFilePath, 'w').close()
 
 
 def sbs_settings():
