@@ -16,7 +16,7 @@ def plugin_loaded():
 	folder = os.path.join( sublime.packages_path(), 'User' )
 
 	themeFilePath = os.path.join( folder, 'SBSCompareTheme.hidden-tmTheme' )
-	schemeFilePath = os.path.join( folder, 'SBSCompareScheme.hidden-scheme' )
+	schemeFilePath = os.path.join( folder, 'SBSCompareScheme.hidden-color-scheme' )
 
 	if not os.path.exists(themeFilePath) or not os.path.exists(schemeFilePath):
 		if not os.path.exists( folder ):
